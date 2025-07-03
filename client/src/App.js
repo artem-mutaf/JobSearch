@@ -1,12 +1,12 @@
 import React from 'react';
-import MoviesList from './components/MoviesList';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './routes/AppRoutes';
 
 function App() {
   return (
-    <div>
-      <h1>Добро пожаловать</h1>
-      <MoviesList />
-    </div>
+    <Router>
+      <AppRoutes />
+    </Router>
   );
 }
 

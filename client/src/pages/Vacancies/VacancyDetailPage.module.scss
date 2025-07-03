@@ -1,0 +1,52 @@
+.vacancyDetail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  
+  .title {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+  }
+
+  .info p {
+    margin: 5px 0;
+    font-weight: 500;
+  }
+
+  .description {
+    margin-top: 20px;
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+  }
+
+  .employer {
+    margin-top: 30px;
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin: 5px 0;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+
+      li {
+        margin: 3px 0;
+      }
+    }
+  }
+}
+
+.loading, .error {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 1.2rem;
+}

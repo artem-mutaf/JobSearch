@@ -1,0 +1,34 @@
+.footer {
+  background-color: #1e1e2f;
+  color: #fff;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.info {
+  font-size: 14px;
+}
+
+.links {
+  display: flex;
+  gap: 20px;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      color: #ffc107;
+    }
+  }
+}

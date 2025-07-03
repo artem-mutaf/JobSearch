@@ -1,0 +1,68 @@
+.header {
+  position: fixed;      /* Прикрепляем к верху */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1e1e2f;
+  padding: 16px 0;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1000;       /* Чтобы был поверх контента */
+  transition: background-color 0.3s ease; /* Плавный переход фона при необходимости */
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  user-select: none;  /* Чтобы текст не выделялся случайно */
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: #ffc107;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Анимация при наведении — плавное изменение цвета */
+.nav a:hover {
+  color: #ffc107;
+}
+
+/* Дополнительный эффект — подчеркивание с анимацией */
+.nav a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background-color: #ffc107;
+  transition: width 0.3s ease;
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
