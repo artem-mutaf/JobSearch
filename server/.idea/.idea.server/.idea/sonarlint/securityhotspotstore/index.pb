@@ -11,3 +11,35 @@ H
 ,JobBoard.Web/Controllers/MoviesController.cs,7\f\7f788ce68c70e4bf7d6da5c2a44a71f53507fb32
 M
 JobBoard.Web/appsettings.json,1\0\10efeef1fa3c1581af33315fedc76946aeb71a7f
+U
+%JobBoard.Domain/Entities/Applicant.cs,1\9\192287f1ca59153f4ad8a97bc465cbc130377f4d
+T
+$JobBoard.Domain/Entities/Employer.cs,3\b\3baad1219b66c21967eeb2ee99fdb360d95edac4
+S
+#JobBoard.Domain/Entities/Vacancy.cs,4\e\4e62ded3f99da71561adcba81c41f4d961145907
+T
+$JobBoard.Domain/Entities/Category.cs,5\8\58cbb9efdf29e636001c5e77ba522e7d5ee640f1
+P
+ JobBoard.Domain/Entities/Chat.cs,e\e\ee0b0e43ab387a79cfd9d7c396edf4bdb14da311
+S
+#JobBoard.Domain/Entities/Message.cs,f\e\fe05ce1a5ac01c9013918448ff3be3f82940e545
+b
+2JobBoard.Domain/Entities/EmailConfirmationToken.cs,d\2\d2fed4619237527ddddd9055c0ee7b2aef960a76
+[
++JobBoard.Domain/ValueObjects/ContactInfo.cs,8\6\8653666bfa61051e865007dc6fde571a9d1d9e30
+X
+(JobBoard.Domain/ValueObjects/Location.cs,3\7\3715a8b3079d027e8506c72d716213e2b4d67d52
+^
+.JobBoard.Domain/ValueObjects/EmploymentType.cs,3\9\3954f7ea9fba45120acb42caf015ab79ce571716
+\
+,JobBoard.Domain/ValueObjects/PasswordHash.cs,6\1\6182ffef48cbc19cac11ee7ab5ab7413ba4c883d
+W
+'JobBoard.Domain/Enums/EmploymentType.cs,1\d\1d7a53f8a6b8f0a27bb3fa99a3a58407fa173672
+S
+#JobBoard.Domain/Enums/EntityType.cs,7\3\737f2b1fd6d9916927fb95df3eaa0d11e474d72b
+Q
+!JobBoard.Domain/Enums/UserRole.cs,c\0\c03480fa4f82637a0d77f2bc10e4dba84329818e
+R
+"JobBoard.Domain/Enums/SortOrder.cs,5\b\5b59598a8a4c227df46b40a1c8ca59021865d6bc
+a
+1JobBoard.Domain/Exceptions/ValidationException.cs,f\b\fbc64b9d71ae99afbd1a19fe62ac035db4f8f284

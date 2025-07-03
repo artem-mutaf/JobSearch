@@ -9,11 +9,7 @@
 
     <ItemGroup>
       <Folder Include="DomainServices\" />
-      <Folder Include="Entities\" />
-      <Folder Include="Enums\" />
-      <Folder Include="Exceptions\" />
       <Folder Include="Interfaces\" />
-      <Folder Include="ValueObjects\" />
     </ItemGroup>
 
 </Project>
