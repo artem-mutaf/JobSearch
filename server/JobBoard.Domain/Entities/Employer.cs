@@ -46,7 +46,7 @@ namespace JobBoard.Core.Entities;
         /// <summary>
         /// Хэшированный пароль работодателя.
         /// </summary>
-        public PasswordHash PasswordHash { get; set; }
+        public string Password { get; set; }
 
         /// <summary>
         /// Флаг, указывающий, подтверждена ли почта работодателя.

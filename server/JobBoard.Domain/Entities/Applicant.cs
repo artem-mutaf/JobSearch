@@ -35,7 +35,7 @@ public class Applicant
     /// <summary>
     /// Хэшированный пароль соискателя.
     /// </summary>
-    public PasswordHash PasswordHash { get; set; }
+    public string Password { get; set; }
 
     /// <summary>
     /// Флаг, указывающий, подтверждена ли почта соискателя.
