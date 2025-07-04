@@ -1,6 +1,8 @@
+using JobBoard.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using JobBoard.Infrastructure.Data;
+using JobBoard.Infrastructure.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +35,15 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "JobBoard API", Version = "v1" });
 });
 
+// Регистрация репозиториев
+builder.Services.AddScoped<IApplicantRepository, ApplicantRepository>();
+builder.Services.AddScoped<IEmployerRepository, EmployerRepository>();
+builder.Services.AddScoped<IVacancyRepository, VacancyRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IChatRepository, ChatRepository>();
+builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddScoped<IEmailConfirmationTokenRepository, EmailConfirmationTokenRepository>();
+
 var app = builder.Build();
 
 // Middleware
@@ -54,7 +65,6 @@ app.UseCors("AllowReact");
 app.UseAuthorization();
 app.MapControllers();
 
-// Перенаправление с корневого URL на Swagger в режиме разработки
 if (app.Environment.IsDevelopment())
 {
     app.MapGet("/", () => Results.Redirect("/swagger/index.html"));
