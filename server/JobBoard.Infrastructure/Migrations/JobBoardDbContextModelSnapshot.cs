@@ -102,14 +102,9 @@ namespace JobBoard.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<Guid?>("ParentCategoryId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Name");
-
-                    b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories", (string)null);
                 });
@@ -261,6 +256,9 @@ namespace JobBoard.Infrastructure.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(5000)
@@ -394,15 +392,6 @@ namespace JobBoard.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("JobBoard.Core.Entities.Category", b =>
-                {
-                    b.HasOne("JobBoard.Core.Entities.Category", "ParentCategory")
-                        .WithMany("SubCategories")
-                        .HasForeignKey("ParentCategoryId");
-
-                    b.Navigation("ParentCategory");
-                });
-
             modelBuilder.Entity("JobBoard.Core.Entities.Chat", b =>
                 {
                     b.HasOne("JobBoard.Core.Entities.Applicant", "Applicant")
@@ -532,8 +521,6 @@ namespace JobBoard.Infrastructure.Migrations
 
             modelBuilder.Entity("JobBoard.Core.Entities.Category", b =>
                 {
-                    b.Navigation("SubCategories");
-
                     b.Navigation("Vacancies");
                 });
 

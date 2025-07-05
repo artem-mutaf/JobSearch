@@ -25,30 +25,42 @@ public class VacancyRepository : IVacancyRepository
 
     public async Task<IEnumerable<Vacancy>> GetAllAsync(
         Expression<Func<Vacancy, bool>>? filter = null,
-        string? sortBy = null,
-        bool ascending = true,
-        int pageNumber = 1,
-        int pageSize = 10)
+    string? sortBy = null,
+    bool ascending = true,
+    int pageNumber = 1,
+    int pageSize = 10)
+{
+    var query = _context.Vacancies
+        .Include(v => v.Employer)
+        .Include(v => v.Category)
+        .AsQueryable();
+
+    if (filter != null)
+        query = query.Where(filter);
+
+    if (!string.IsNullOrEmpty(sortBy))
     {
-        var query = _context.Vacancies
-            .Include(v => v.Employer)
-            .Include(v => v.Category)
-            .AsQueryable();
-
-        if (filter != null)
-            query = query.Where(filter);
-
-        if (!string.IsNullOrEmpty(sortBy))
+        switch (sortBy.ToLower())
         {
-            if (sortBy.Equals("Title", StringComparison.OrdinalIgnoreCase))
+            case "title":
                 query = ascending ? query.OrderBy(v => v.Title) : query.OrderByDescending(v => v.Title);
+                break;
+            case "createdat":
+                query = ascending ? query.OrderBy(v => v.CreatedAt) : query.OrderByDescending(v => v.CreatedAt);
+                break;
+            case "salary":
+                query = ascending ? query.OrderBy(v => v.Salary) : query.OrderByDescending(v => v.Salary);
+                break;
+            default:
+                break;
         }
-
-        return await query
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
     }
+
+    return await query
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
+        .ToListAsync();
+}
 
     public async Task<IEnumerable<Vacancy>> GetByEmployerIdAsync(Guid employerId)
     {

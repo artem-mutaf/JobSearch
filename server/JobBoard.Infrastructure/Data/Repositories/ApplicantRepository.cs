@@ -48,10 +48,17 @@ public class ApplicantRepository : IApplicantRepository
 
         if (!string.IsNullOrEmpty(sortBy))
         {
-            if (sortBy.Equals("Email", StringComparison.OrdinalIgnoreCase))
-                query = ascending ? query.OrderBy(a => a.Email) : query.OrderByDescending(a => a.Email);
-            else if (sortBy.Equals("FullName", StringComparison.OrdinalIgnoreCase))
-                query = ascending ? query.OrderBy(a => a.FullName) : query.OrderByDescending(a => a.FullName);
+            switch (sortBy.ToLower())
+            {
+                case "email":
+                    query = ascending ? query.OrderBy(a => a.Email) : query.OrderByDescending(a => a.Email);
+                    break;
+                case "fullname":
+                    query = ascending ? query.OrderBy(a => a.FullName) : query.OrderByDescending(a => a.FullName);
+                    break;
+                default:
+                    break;
+            }
         }
 
         return await query
@@ -68,7 +75,21 @@ public class ApplicantRepository : IApplicantRepository
 
     public async Task UpdateAsync(Applicant applicant)
     {
-        _context.Applicants.Update(applicant);
+        // Загружаем существующего соискателя с категориями
+        var existingApplicant = await _context.Applicants
+            .Include(a => a.Categories)
+            .FirstOrDefaultAsync(a => a.Id == applicant.Id);
+
+        if (existingApplicant == null)
+            throw new Exception("Applicant not found.");
+
+        // Обновляем скалярные свойства
+        _context.Entry(existingApplicant).CurrentValues.SetValues(applicant);
+
+        // Обновляем категории
+        existingApplicant.Categories.Clear();
+        existingApplicant.Categories.AddRange(applicant.Categories);
+
         await _context.SaveChangesAsync();
     }
 

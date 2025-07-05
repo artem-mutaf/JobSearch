@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace JobBoard.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class AddCreatedAtToVacancy : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,17 +37,11 @@ namespace JobBoard.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    ParentCategoryId = table.Column<Guid>(type: "uuid", nullable: true)
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Categories_Categories_ParentCategoryId",
-                        column: x => x.ParentCategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -148,7 +142,8 @@ namespace JobBoard.Infrastructure.Migrations
                     EmploymentType = table.Column<string>(type: "text", nullable: false),
                     ImageUrl = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     CategoryId = table.Column<Guid>(type: "uuid", nullable: false),
-                    EmployerId = table.Column<Guid>(type: "uuid", nullable: false)
+                    EmployerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -235,11 +230,6 @@ namespace JobBoard.Infrastructure.Migrations
                 name: "IX_Categories_Name",
                 table: "Categories",
                 column: "Name");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Categories_ParentCategoryId",
-                table: "Categories",
-                column: "ParentCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Chats_ApplicantId",

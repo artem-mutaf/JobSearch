@@ -18,8 +18,6 @@ public class CategoryRepository : ICategoryRepository
     public async Task<Category?> GetByIdAsync(Guid id)
     {
         return await _context.Categories
-            .Include(c => c.Applicants)
-            .Include(c => c.Employers)
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 
@@ -28,10 +26,7 @@ public class CategoryRepository : ICategoryRepository
         string? sortBy = null,
         bool ascending = true)
     {
-        var query = _context.Categories
-            .Include(c => c.Applicants)
-            .Include(c => c.Employers)
-            .AsQueryable();
+        var query = _context.Categories.AsQueryable();
 
         if (filter != null)
             query = query.Where(filter);

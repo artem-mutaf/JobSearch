@@ -16,21 +16,6 @@ public class Category
     public string Name { get; set; }
 
     /// <summary>
-    /// Идентификатор родительской категории (для подкатегорий, опционально).
-    /// </summary>
-    public Guid? ParentCategoryId { get; set; }
-
-    /// <summary>
-    /// Родительская категория (если есть).
-    /// </summary>
-    public Category ParentCategory { get; set; }
-
-    /// <summary>
-    /// Список дочерних категорий.
-    /// </summary>
-    public List<Category> SubCategories { get; set; } = new();
-
-    /// <summary>
     /// Список вакансий, относящихся к категории.
     /// </summary>
     public List<Vacancy> Vacancies { get; set; } = new();

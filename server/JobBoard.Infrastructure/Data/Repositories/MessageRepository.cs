@@ -18,15 +18,14 @@ public class MessageRepository : IMessageRepository
     public async Task<Message?> GetByIdAsync(Guid id)
     {
         return await _context.Messages
-            .Include(m => m.Chat)
             .FirstOrDefaultAsync(m => m.Id == id);
     }
 
     public async Task<IEnumerable<Message>> GetByChatIdAsync(Guid chatId)
     {
         return await _context.Messages
-            .Include(m => m.Chat)
             .Where(m => m.ChatId == chatId)
+            .OrderBy(m => m.SentAt) // Сортировка по времени отправки
             .ToListAsync();
     }
 
@@ -36,7 +35,6 @@ public class MessageRepository : IMessageRepository
         bool ascending = true)
     {
         var query = _context.Messages
-            .Include(m => m.Chat)
             .AsQueryable();
 
         if (filter != null)

@@ -19,7 +19,5 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
         builder.HasKey(c => c.Id);
         builder.Property(c => c.Name).IsRequired().HasMaxLength(100);
         builder.HasIndex(c => c.Name); // Для поиска и фильтрации
-        builder.HasOne(c => c.ParentCategory).WithMany(c => c.SubCategories)
-            .HasForeignKey(c => c.ParentCategoryId).IsRequired(false);
     }
 }

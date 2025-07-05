@@ -56,4 +56,5 @@ public class Vacancy
     /// Работодатель, создавший вакансию.
     /// </summary>
     public Employer Employer { get; set; }
+    public DateTime CreatedAt { get; set; }
 }
