@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import styles from './VacancyDetailPage.module.scss'
 
 function VacancyDetailPage() {
-  const { id } = useParams(); // получаем id вакансии из URL
+  const { id } = useParams();
   const [vacancy, setVacancy] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -12,7 +12,7 @@ function VacancyDetailPage() {
     // Имитируем загрузку данных (заглушка)
     const fetchVacancy = async () => {
       setLoading(true);
-      // Симуляция задержки
+      
       await new Promise(r => setTimeout(r, 500));
 
       // Заглушка вакансии

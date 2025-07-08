@@ -7,9 +7,11 @@ function VacancyCard({ vacancy }) {
     <Link to={`/vacancies/${vacancy.id}`} className={styles.cardLink}>
       <div className={styles.card}>
         <h3>{vacancy.title}</h3>
-        <p><strong>Категория:</strong> {vacancy.category}</p>
-        <p><strong>Зарплата:</strong> {vacancy.salary}</p>
-        <p>{vacancy.description}</p>
+        <p><strong>Категория:</strong> {vacancy.CategoryId}</p>
+        <p><strong>{vacancy.Title}</strong> </p>
+        <p><strong>Время объявления вакансии:</strong> {vacancy.CreatedAt}</p>
+        <p><strong>Зарплата:</strong> {vacancy.Salary}</p>
+        <p>{vacancy.Description}</p>
       </div>
     </Link>
   );

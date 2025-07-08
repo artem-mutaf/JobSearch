@@ -24,13 +24,27 @@
   font-size: 24px;
   font-weight: bold;
   text-decoration: none;
-  color: #fff;
-  user-select: none;  /* Чтобы текст не выделялся случайно */
-  transition: color 0.3s ease;
+  background: linear-gradient(90deg, #FFD700, #ffffff, #FFD700);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
 }
 
 .logo:hover {
   color: #ffc107;
+  animation: shine 0.7s linear infinite;
 }
 
 .nav {

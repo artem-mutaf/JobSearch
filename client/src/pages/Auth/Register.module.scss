@@ -1,4 +1,4 @@
-// Переменные остаются те же
+
 $primary: #4361ee;
 $primary-dark: #3a0ca3;
 $secondary: #f72585;
@@ -18,8 +18,8 @@ html, body {
 
 .pageWrapper {
   display: flex;
-  justify-content: center; // горизонтальный центр
-  align-items: center;     // вертикальный центр
+  justify-content: center; 
+  align-items: center;     
   min-height: 100vh;
 }
 
@@ -66,18 +66,18 @@ html, body {
 
   .formGroup {
     position: relative;
-    width: $input-width; // Фиксируем ширину
+    width: $input-width; 
     
     input , select {
       width: 100%;
       padding: $input-padding;
-      padding-top: $input-padding + 0.4rem; // Больше отступ сверху для лейбла
-      border: 1px solid $border; // Более тонкая граница
-      border-radius: 6px; // Меньше скругление
+      padding-top: $input-padding + 0.4rem; 
+      border: 1px solid $border;
+      border-radius: 6px;
       font-size: 0.95rem;
       transition: $transition;
-      background-color: #fff; // Белый фон вместо светлого
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05); // Легкая тень
+      background-color: #fff; 
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
       
       &:focus {
         border-color: $primary;
@@ -110,68 +110,10 @@ html, body {
       padding: 0 0.3rem;
     }
 
-    // select {
-    //   width: 100%;
-    //   padding: $input-padding;
-    //   padding-top: $input-padding + 0.4rem;
-    //   border: 1px solid $border;
-    //   border-radius: 6px;
-    //   font-size: 0.95rem;
-    //   transition: $transition;
-    //   background-color: #fff;
-    //   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    //   appearance: none; // Убираем стандартный стиль браузера
-    //   cursor: pointer;
-    //   position: relative;
-    //   z-index: 1; // Чтобы label был под select при фокусе
-
-    //   // Иконка стрелки для select
-    //     &::after {
-    //     content: '▼';
-    //     position: absolute;
-    //     right: $input-padding;
-    //     top: 50%;
-    //     transform: translateY(-50%);
-    //     color: lighten($text, 30%);
-    //     font-size: 0.7rem;
-    //     pointer-events: none;
-    //     transition: $transition;
-    //     z-index: 0;
-    //     }
-
-    //     &:focus-within::after {
-    //     color: $primary;
-    //     }
-
-    //   &:focus {
-    //     border-color: $primary;
-    //     box-shadow: 0 0 0 2px rgba($primary, 0.15);
-    //     outline: none;
-    //   }
-
-    //   // Стили для option
-    //   option {
-    //     padding: 8px;
-    //     background: #fff;
-    //     color: $text;
-    //   }
-
-    // }
-
     
-
-    // // Стили label для select (аналогично input)
-    // select:focus + label,
-    // select:not([value=""]):valid + label {
-    //   transform: translateY(-0.7rem) scale(0.82);
-    //   color: $primary;
-    //   left: $input-padding - 0.2rem;
-    //   background: #fff;
-    //   padding: 0 0.3rem;
-    // }
   }
 
-  // Стили для динамических полей
+  
   .roleFields {
     width: $input-width;
     display: flex;
@@ -244,7 +186,7 @@ html, body {
   }
 }
 
-// Анимации
+//Анимации
 @keyframes fadeInUp {
   from {
     opacity: 0;

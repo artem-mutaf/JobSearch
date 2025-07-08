@@ -10,7 +10,6 @@ function Header() {
         <nav className={styles.nav}>
           <Link to="/vacancies">Вакансии</Link>
           <Link to="/login">Войти</Link>
-          <Link to="/chat">Чат</Link>
         </nav>
       </div>
     </header>

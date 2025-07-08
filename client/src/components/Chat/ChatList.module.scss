@@ -1,27 +1,78 @@
 .chatList {
-  width: 250px;
-  border-right: 1px solid #ccc;
-  padding: 1rem;
+  width: 300px;
+  border-right: 1px solid #eaeaea;
+  background: #f9f9f9;
+  height: 100%;
   overflow-y: auto;
+
+  h3 {
+    padding: 15px;
+    margin: 0;
+    border-bottom: 1px solid #eaeaea;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    padding: 15px;
+    border-bottom: 1px solid #eaeaea;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background: #f0f0f0;
+    }
+
+    &.active {
+      background: #e0e0e0;
+      font-weight: 500;
+    }
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4CAF50;
+      margin-right: 10px;
+    }
+  }
 }
 
-.chatList ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.noChatSelected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #666;
+
+  p {
+    margin-bottom: 20px;
+  }
 }
 
-.chatList li {
-  padding: 0.5rem;
-  cursor: pointer;
+.newChatButton {
+  padding: 10px 20px;
+  background: #4b6cb7;
+  color: white;
+  border: none;
   border-radius: 4px;
-}
+  cursor: pointer;
+  transition: background 0.2s;
 
-.chatList li:hover {
-  background-color: #eee;
-}
-
-.active {
-  background-color: #ddd;
-  font-weight: bold;
+  &:hover {
+    background: #3a5a9c;
+  }
 }

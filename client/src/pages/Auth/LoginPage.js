@@ -8,46 +8,50 @@ function LoginPage() {
 
   return (
     <div className={styles.pageWrapper}>
+
       <div className={styles.authContainer}>
-      <h2>Вход</h2>
-      <form className={styles.form}>
-        <div className={styles.formGroup}>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder=" "
-              required
-            />
-            <label htmlFor="email">Email</label>
+
+        <h2>Вход</h2>
+
+        <form className={styles.form}>
+          
+          <div className={styles.formGroup}>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder=" "
+                required
+              />
+              <label htmlFor="email">Email</label>
+            </div>
+
+            <div className={styles.formGroup}>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder=" "
+                required
+              />
+              <label htmlFor="password">Пароль</label>
           </div>
 
-          <div className={styles.formGroup}>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              placeholder=" "
-              required
-            />
-            <label htmlFor="password">Пароль</label>
+          <button type="submit" className={styles.submitBtn}>
+            Войти
+          </button>
+        </form>
+
+        <div className={styles.registerPrompt}>
+          <p>Нет аккаунта?&nbsp;
+            <Link to="/register" className={styles.registerLink}>
+              Зарегистрироваться
+            </Link>
+          </p>
         </div>
-
-        <button type="submit" className={styles.submitBtn}>
-          Войти
-        </button>
-      </form>
-
-      <div className={styles.registerPrompt}>
-        <p>Нет аккаунта?&nbsp;
-          <Link to="/register" className={styles.registerLink}>
-            Зарегистрироваться
-          </Link>
-        </p>
       </div>
-    </div>
     </div>
     
   );

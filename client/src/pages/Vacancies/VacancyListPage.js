@@ -1,33 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import VacancyCard from '../../components/VacancyCard/VacancyCard';
 import Pagination from '../../components/Pagination/Pagination';
 import styles from './VacancyListPage.module.scss';
+import { useLocation } from 'react-router-dom';
+import { searchVacancies } from '../../api/vacancies';
 
-const vacanciesMock = [
-  // Добавь больше элементов для демонстрации пагинации
-  { id: 1, title: 'Frontend Developer', category: 'IT', salary: '1000$', description: 'Работа с React...' },
-  { id: 2, title: 'Backend Developer', category: 'IT', salary: '1200$', description: 'Работа с .NET...' },
-  { id: 3, title: 'Менеджер', category: 'Продажи', salary: '800$', description: 'Работа с клиентами...' },
-  { id: 4, title: 'Дизайнер', category: 'IT', salary: '900$', description: 'Работа с UI/UX...' },
-  { id: 5, title: 'QA Engineer', category: 'IT', salary: '950$', description: 'Тестирование...' },
-  { id: 6, title: 'HR', category: 'Администрация', salary: '700$', description: 'Подбор персонала...' },
-  // ... добавь сколько хочешь
-];
 
 const ITEMS_PER_PAGE = 2;
+
+
 
 function VacancyListPage() {
   const [filterCategory, setFilterCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [vacancies, setVacancies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const filtered = filterCategory
-    ? vacanciesMock.filter(v => v.category === filterCategory)
-    : vacanciesMock;
+  const fetchVacancies = async () => {
+    setLoading(true);
+    try {
+      const data = await searchVacancies({
+        categoryId: filterCategory || null,
+        pageNumber: currentPage,
+        pageSize: ITEMS_PER_PAGE,
+        sortBy: null,
+        sortDescending: false,
+      });
 
-  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+       console.log('Полученные вакансии:', data);
+       
+      setVacancies(data);
+    } catch (error) {
+      console.error('Ошибка при загрузке вакансий:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentItems = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  useEffect(() => {
+    fetchVacancies();
+  }, [filterCategory, currentPage]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -36,6 +48,7 @@ function VacancyListPage() {
   return (
     <div className={styles.container}>
       <h1>Вакансии</h1>
+
       <div className={styles.filters}>
         <label htmlFor="category">Категория:</label>
         <select
@@ -43,7 +56,7 @@ function VacancyListPage() {
           value={filterCategory}
           onChange={e => {
             setFilterCategory(e.target.value);
-            setCurrentPage(1); // сбросить на первую страницу при фильтрации
+            setCurrentPage(1);
           }}
         >
           <option value="">Все</option>
@@ -53,17 +66,23 @@ function VacancyListPage() {
         </select>
       </div>
 
-      <div className={styles.vacancyList}>
-        {currentItems.map(vacancy => (
-          <VacancyCard key={vacancy.id} vacancy={vacancy} />
-        ))}
-      </div>
+      {loading ? (
+        <p>Загрузка...</p>
+      ) : (
+        <>
+          <div className={styles.vacancyList}>
+            {vacancies.map(vacancy => (
+              <VacancyCard key={vacancy.id} vacancy={vacancy} />
+            ))}
+          </div>
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={Math.ceil(vacancies.length / ITEMS_PER_PAGE)} // возможно, придётся править, если бэк вернёт totalCount
+            onPageChange={handlePageChange}
+          />
+        </>
+      )}
     </div>
   );
 }
