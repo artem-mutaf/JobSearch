@@ -62,7 +62,7 @@ function RegisterPage() {
             <label htmlFor="confirmPassword">Подтвердите пароль</label>
           </div>
 
-          {/* Дополнительные поля для работодателя */}
+          
           {role === 'employer' && (
             <div className={styles.roleFields}>
               <div className={styles.formGroup}>
@@ -76,7 +76,7 @@ function RegisterPage() {
             </div>
           )}
 
-          {/* Дополнительные поля для соискателя */}
+          
           {role === 'applicant' && (
             <div className={styles.roleFields}>
               <div className={styles.formGroup}>
@@ -104,7 +104,6 @@ function RegisterPage() {
             </Link>
           </p>
         </div>
-        
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ $transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
 .cardLink {
   text-decoration: none;
-  color: inherit; /* чтобы ссылка не меняла цвет текста */
+  color: inherit; 
   display: block;
   border-radius: $border-radius;
   transition: transform $transition-duration $transition-ease, box-shadow $transition-duration $transition-ease;

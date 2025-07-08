@@ -1,4 +1,3 @@
-// Переменные
 $primary: #4361ee;
 $primary-dark: #3a0ca3;
 $secondary: #f72585;
@@ -7,10 +6,10 @@ $light: #f8f9fa;
 $border: #e9ecef;
 $error-color: #ef223c;
 $transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-$input-width: 320px;  // Фиксированная ширина для компактности
+$input-width: 320px;  
 $input-padding: 0.7rem;
 
-// Глобальные стили для центрирования
+
 html, body {
   height: 100%;
   margin: 0;
@@ -18,8 +17,8 @@ html, body {
 
 .pageWrapper {
   display: flex;
-  justify-content: center; // горизонтальный центр
-  align-items: center;     // вертикальный центр
+  justify-content: center; 
+  align-items: center;     
   min-height: 100vh;
 }
 
@@ -61,23 +60,23 @@ html, body {
 .form {
   display: flex;
   flex-direction: column;
-  align-items: center; // Центрируем форму
+  align-items: center; 
   gap: 1.2rem;
   
   .formGroup {
     position: relative;
-    width: $input-width; // Фиксируем ширину
+    width: $input-width; 
     
     input {
       width: 100%;
       padding: $input-padding;
-      padding-top: $input-padding + 0.4rem; // Больше отступ сверху для лейбла
-      border: 1px solid $border; // Более тонкая граница
-      border-radius: 6px; // Меньше скругление
+      padding-top: $input-padding + 0.4rem; 
+      border: 1px solid $border;
+      border-radius: 6px;
       font-size: 0.95rem;
       transition: $transition;
-      background-color: #fff; // Белый фон вместо светлого
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05); // Легкая тень
+      background-color: #fff; 
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05); 
       
       &:focus {
         border-color: $primary;
@@ -173,7 +172,7 @@ html, body {
   }
 }
 
-// Анимация появления формы
+//Анимация появления формы
 @keyframes fadeInUp {
   from {
     opacity: 0;
