@@ -1,10 +1,11 @@
 ﻿using JobBoard.Core.Entities;
+using System.Threading.Tasks;
 
 namespace JobBoard.Core.Interfaces;
 
 public interface IEmailConfirmationTokenRepository
 {
-    Task<EmailConfirmationToken?> GetByTokenAsync(string token);
+    Task<EmailConfirmationToken?> GetByCodeAsync(string code);
     Task AddAsync(EmailConfirmationToken token);
-    Task DeleteAsync(Guid id);
+    Task UpdateAsync(EmailConfirmationToken token);
 }

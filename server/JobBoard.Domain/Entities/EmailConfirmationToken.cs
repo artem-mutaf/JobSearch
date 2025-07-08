@@ -18,7 +18,7 @@ public class EmailConfirmationToken
     /// <summary>
     /// Уникальный токен подтверждения.
     /// </summary>
-    public string Token { get; set; }
+    public string Code { get; set; }
 
     /// <summary>
     /// Дата и время истечения срока действия токена.

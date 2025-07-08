@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace JobBoard.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCreatedAtToVacancy : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,9 +50,9 @@ namespace JobBoard.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    Token = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Code = table.Column<string>(type: "character varying(6)", maxLength: 6, nullable: false),
                     ExpiresAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    IsUsed = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    IsUsed = table.Column<bool>(type: "boolean", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -247,9 +247,9 @@ namespace JobBoard.Infrastructure.Migrations
                 column: "VacancyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmailConfirmationTokens_Token",
+                name: "IX_EmailConfirmationTokens_Code",
                 table: "EmailConfirmationTokens",
-                column: "Token",
+                column: "Code",
                 unique: true);
 
             migrationBuilder.CreateIndex(

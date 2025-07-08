@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -13,8 +12,8 @@ using AutoMapper;
 using JobBoard.Application.Mappers;
 using JobBoard.Core.Entities;
 using JobBoard.Core.Interfaces;
+using JobBoard.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,29 +30,10 @@ builder.Services.AddDbContext<JobBoardDbContext>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReact", policy =>
-        policy.WithOrigins("http://localhost:3000", "https://032a-80-94-250-53.ngrok-free.app")
+        policy.WithOrigins("http://localhost:3000", "https://a86a-217-19-215-68.ngrok-free.app")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials());
-});
-
-builder.Services.AddSingleton<IPasswordHasher<Employer>, PasswordHasher<Employer>>();
-builder.Services.AddSingleton<IPasswordHasher<Applicant>, PasswordHasher<Applicant>>();
-// Регистрация AutoMapper
-builder.Services.AddAutoMapper(typeof(MappingProfile));
-
-// Регистрация контроллеров
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.PropertyNamingPolicy = null;
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); // Сериализация перечислений как строк
-    });
-
-// Регистрация Swagger
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "JobBoard API", Version = "v1" });
 });
 
 // Регистрация сервисов
@@ -63,7 +43,9 @@ builder.Services.AddScoped<IApplicantService, ApplicantService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IChatService, ChatService>();
 builder.Services.AddScoped<IMessageService, MessageService>();
-builder.Services.AddValidatorsFromAssemblyContaining<EmployerDtoValidator>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IEmailConfirmationService, EmailConfirmationService>();
+builder.Services.AddScoped<IEmailConfirmationTokenRepository, EmailConfirmationTokenRepository>();
 
 // Регистрация репозиториев
 builder.Services.AddScoped<IApplicantRepository, ApplicantRepository>();
@@ -72,7 +54,33 @@ builder.Services.AddScoped<IVacancyRepository, VacancyRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IChatRepository, ChatRepository>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
-builder.Services.AddScoped<IEmailConfirmationTokenRepository, EmailConfirmationTokenRepository>();
+
+// Регистрация AutoMapper
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+// Регистрация валидаторов
+builder.Services.AddValidatorsFromAssemblyContaining<EmployerDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<LoginDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<ConfirmEmailDtoValidator>();
+
+// Регистрация PasswordHasher
+builder.Services.AddSingleton<IPasswordHasher<Employer>, PasswordHasher<Employer>>();
+builder.Services.AddSingleton<IPasswordHasher<Applicant>, PasswordHasher<Applicant>>();
+
+// Регистрация контроллеров
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
+// Регистрация Swagger
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "JobBoard API", Version = "v1" });
+});
 
 var app = builder.Build();
 
@@ -92,6 +100,7 @@ else
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors("AllowReact");
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
